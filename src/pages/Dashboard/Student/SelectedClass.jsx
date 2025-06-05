@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 import { Pagination, ThemeProvider, createTheme } from '@mui/material';
 import { ScaleLoader } from 'react-spinners';
 
+// [All imports remain unchanged]
+
 const SelectedClass = () => {
     useTitle('Selected Class | Yoga Master Selected Class');
     const { currentUser } = useUser();
@@ -27,10 +29,10 @@ const SelectedClass = () => {
     const theme = createTheme({
         palette: {
             primary: {
-                main: '#ff0000', // Set the primary color
+                main: '#ff0000',
             },
             secondary: {
-                main: '#00ff00', // Set the secondary color
+                main: '#00ff00',
             },
         },
     });
@@ -61,9 +63,7 @@ const SelectedClass = () => {
     const price = totalPrice + totalTax;
 
     const handlePay = (id) => {
-        console.log(id, 'id from pay')
         const item = classes.find((item) => item._id === id);
-        // console.log(item, 'item from pay')
         const price = item.price;
         navigate('/dashboard/user/payment', { state: { price: price, itemId: id } });
     };
@@ -81,36 +81,37 @@ const SelectedClass = () => {
             if (result.isConfirmed) {
                 axiosSecure.delete(`/delete-cart-item/${id}`)
                     .then(res => {
-                        console.log(res.data)
                         if (res.data.deletedCount > 0) {
-                            Swal.fire(
-                                'Deleted!',
-                                'Your selected class has been deleted.',
-                                'success'
-                            )
+                            Swal.fire('Deleted!', 'Your selected class has been deleted.', 'success');
                             const newClasses = classes.filter((item) => item._id !== id);
                             setClasses(newClasses);
                         }
                     })
             }
         })
-        // Handle the delete action here
     };
-    if (loading) { // [2
+
+    if (loading) {
         return <div className='h-full w-full flex justify-center items-center'><ScaleLoader color="#FF1949" /></div>;
     }
+
     return (
         <div>
             <div className="my-6">
-                <h1 className='text-4xl text-center font-bold'>My <span className='text-secondary'>Selected</span> Class</h1>
+                <h1 className='text-4xl text-center font-bold'>
+                    My <span className='text-secondary'>Selected</span> Class
+                </h1>
             </div>
-            <div className="h-screen py-8">
-                <div className="container mx-auto px-4">
+
+            <div className="min-h-screen py-8">
+                <div className="container mx-auto px-2 sm:px-4">
                     <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
-                    <div className="flex flex-col md:flex-row gap-4">
-                        <div className="md:w-3/4">
-                            <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-                                <table className="w-full">
+
+                    <div className="flex flex-col lg:flex-row gap-4">
+                        {/* Main Table Section */}
+                        <div className="w-full lg:w-3/4">
+                            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-4 overflow-x-auto">
+                                <table className="w-full min-w-[600px]">
                                     <thead>
                                         <tr>
                                             <th className="text-left font-semibold">#</th>
@@ -122,53 +123,64 @@ const SelectedClass = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            classes.length === 0 ? <tr><td colSpan='5' className='text-center text-2xl font-bold'>No Classes Found</td></tr> : // If there is no item in the cart
+                                            classes.length === 0 ? (
+                                                <tr>
+                                                    <td colSpan='5' className='text-center text-2xl font-bold'>No Classes Found</td>
+                                                </tr>
+                                            ) :
                                                 paginatedData.map((item, idx) => {
                                                     const letIdx = (page - 1) * itemPerPage + idx + 1;
-                                                    return <tr key={item._id}>
-                                                        <td className="py-4">{letIdx}</td>
-                                                        <td className="py-4">
-                                                            <div className="flex items-center">
-                                                                <img className="h-16 w-16 mr-4" src={item.image} alt="Product image" />
-                                                                <span className={`font-semibold ${item.name.length > 20 ? 'text-[13px]' : 'text-[18px]'} whitespace-pre-wrap`}>{item.name}</span>
-                                                            </div>
-                                                        </td>
-                                                        <td className="py-4">${item.price}</td>
-                                                        <td className="py-4">
-                                                            <p className='text-green-700 text-sm'>{moment(item.submitted).format('MMMM Do YYYY')}</p>
-                                                        </td>
-                                                        <td className="py-4 flex pt-8 gap-2">
-                                                            <motion.button
-                                                                whileHover={{ scale: 1.1 }}
-                                                                whileTap={{ scale: 0.9 }}
-                                                                className='px-3 py-1 cursor-pointer bg-red-500 rounded-3xl text-white font-bold'
-                                                                onClick={() => handleDelete(item._id)}
-                                                            >
-                                                                <MdDeleteSweep />
-                                                            </motion.button>
-                                                            <motion.button
-                                                                whileHover={{ scale: 1.1 }}
-                                                                whileTap={{ scale: 0.9 }}
-                                                                className='px-3 py-1 cursor-pointer bg-green-500 rounded-3xl text-white font-bold flex items-center'
-                                                                onClick={() => handlePay(item._id)}
-                                                            >
-                                                                <FiDollarSign className="mr-2" />
-                                                                Pay
-                                                            </motion.button>
-
-
-                                                        </td>
-                                                    </tr>
-                                                })}
+                                                    return (
+                                                        <tr key={item._id}>
+                                                            <td className="py-4">{letIdx}</td>
+                                                            <td className="py-4">
+                                                                <div className="flex items-center">
+                                                                    <img className="h-16 w-16 mr-4 object-cover" src={item.image} alt="Product" />
+                                                                    <span className={`font-semibold ${item.name.length > 20 ? 'text-[13px]' : 'text-[18px]'} whitespace-pre-wrap`}>
+                                                                        {item.name}
+                                                                    </span>
+                                                                </div>
+                                                            </td>
+                                                            <td className="py-4">${item.price}</td>
+                                                            <td className="py-4">
+                                                                <p className='text-green-700 text-sm'>{moment(item.submitted).format('MMMM Do YYYY')}</p>
+                                                            </td>
+                                                            <td className="py-4 flex flex-wrap gap-2">
+                                                                <motion.button
+                                                                    whileHover={{ scale: 1.1 }}
+                                                                    whileTap={{ scale: 0.9 }}
+                                                                    className='px-3 py-1 cursor-pointer bg-red-500 rounded-3xl text-white font-bold'
+                                                                    onClick={() => handleDelete(item._id)}
+                                                                >
+                                                                    <MdDeleteSweep />
+                                                                </motion.button>
+                                                                <motion.button
+                                                                    whileHover={{ scale: 1.1 }}
+                                                                    whileTap={{ scale: 0.9 }}
+                                                                    className='px-3 py-1 cursor-pointer bg-green-500 rounded-3xl text-white font-bold flex items-center'
+                                                                    onClick={() => handlePay(item._id)}
+                                                                >
+                                                                    <FiDollarSign className="mr-2" />
+                                                                    Pay
+                                                                </motion.button>
+                                                            </td>
+                                                        </tr>
+                                                    );
+                                                })
+                                        }
                                     </tbody>
                                 </table>
-                                <ThemeProvider theme={theme}>
-                                    <Pagination onChange={handleChange} count={totalPage} color="primary" />
-                                </ThemeProvider>
+                                <div className="mt-4 flex justify-center">
+                                    <ThemeProvider theme={theme}>
+                                        <Pagination onChange={handleChange} count={totalPage} color="primary" />
+                                    </ThemeProvider>
+                                </div>
                             </div>
                         </div>
-                        <div className="md:w-1/5 fixed right-3">
-                            <div className="bg-white rounded-lg shadow-md p-6">
+
+                        {/* Summary Panel */}
+                        <div className="w-full lg:w-1/4">
+                            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
                                 <h2 className="text-lg font-semibold mb-4">Summary</h2>
                                 <div className="flex justify-between mb-2">
                                     <span>Subtotal</span>
@@ -176,9 +188,7 @@ const SelectedClass = () => {
                                 </div>
                                 <div className="flex justify-between mb-2">
                                     <span>Taxes</span>
-                                    <span>
-                                        ${totalTax.toFixed(2)}
-                                    </span>
+                                    <span>${totalTax.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between mb-2">
                                     <span>Extra Fees</span>
@@ -206,5 +216,7 @@ const SelectedClass = () => {
         </div>
     );
 };
+
+
 
 export default SelectedClass;

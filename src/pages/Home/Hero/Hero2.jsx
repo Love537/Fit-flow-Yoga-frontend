@@ -9,7 +9,7 @@ const Hero2 = () => {
                         <h3 className='md:text-4xl text-2xl'>WE PROVIDES</h3>
                         <h1 className='md:text-7xl text-4xl font-bold '>Super Creative Support</h1>
                         <div className="md:w-1/2">
-                            <p className=''>We offered Super creative support. Such on help ye some door if in. Laughter proposal laughing any son law consider.</p>
+                            <p className=''>We offered Super creative support. Such on help ye some door if in. Laughter proposal laughing any age consider.</p>
                         </div>
                         <div className="flex flex-wrap items-center gap-5">
                             <button className='px-7 py-3 rounded-lg bg-secondary font-bold uppercase'>Join Today</button>
