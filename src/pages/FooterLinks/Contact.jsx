@@ -31,8 +31,8 @@ const Contact = () => {
                 <div className="space-y-4">
                     <h3 className="text-2xl font-semibold text-[#c04c45]">Yoga New Zealand</h3>
                     <p>P.O. Box 22114, Bay of plenty</p>
-                    <p>Email: <a href="mailto:info@yoganewzealand.org.nz" className="text-blue-600">info@yoganewzealand.org.nz</a></p>
-                    <p>Phone: 0800 NZ YOGA / 0800 69 9642</p>
+                    <p>Email: <a href="mailto:info@yoganewzealand.org.nz" className="text-blue-600">info@fitflow.gmail.com</a></p>
+                    <p>Phone: 0800 NZ YOGA / 0800 41 1234</p>
                     <div className="flex space-x-4 pt-4 text-[#c04c45] text-2xl">
                         <a href="https://facebook.com" target="_blank"><FaFacebook /></a>
                         <a href="https://instagram.com" target="_blank"><FaInstagram /></a>
