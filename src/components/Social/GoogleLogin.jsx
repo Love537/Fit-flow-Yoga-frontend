@@ -23,7 +23,7 @@ const GoogleLogin = () => {
                     };
 
                     if (user.email && user.displayName) {
-                        return axios.post('https://yoga-fit-flow-server.onrender.com/new-user', userImp)
+                        return axios.post('https://fit-flow-yoga-backend.onrender.com/new-user', userImp)
                             .then(() => {
                                 navigate('/');
                                 return 'Registration successful!';

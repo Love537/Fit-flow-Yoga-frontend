@@ -8,7 +8,7 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
 
   const axiosSecure = axios.create({
-    baseURL: 'https://yoga-fit-flow-server.onrender.com',
+    baseURL: 'https://fit-flow-yoga-backend.onrender.com',
   });
 
   useEffect(() => {

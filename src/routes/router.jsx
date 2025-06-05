@@ -28,6 +28,9 @@ import EnrolledClasses from "../pages/Dashboard/Student/Enroll/EnrolledClasses";
 import UpdateClass from "../pages/Dashboard/Instructors/UpdateClass";
 import SingleClass from "../pages/classes/SingleClass";
 
+import HealthyDiet from "../pages/FooterLinks/HealthyDiet";
+import About from "../pages/FooterLinks/About";
+import Contact from "../pages/FooterLinks/Contact";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -57,7 +60,23 @@ export const router = createBrowserRouter([
             {
                 path: "class/:id",
                 element: <SingleClass/>,
-                loader: ({ params }) => fetch(`https://yoga-fit-flow-server.onrender.com/class/${params.id}`),
+                loader: ({ params }) => fetch(`https://fit-flow-yoga-backend.onrender.com/class/${params.id}`),
+            }
+            ,
+            {
+                path: "HealthyDiet",
+                element: <HealthyDiet/>,
+            }
+            ,
+            {
+                path: "About",
+                element: <About/>,
+               
+            },
+            {
+                path: "Contact",
+                element: <Contact/>,
+               
             }
         ]
     },
@@ -78,7 +97,7 @@ export const router = createBrowserRouter([
             {
                 path: 'update-user/:id',
                 element: <AdminRoute><UpdateUser /></AdminRoute>,
-                loader: ({ params }) => fetch(`https://yoga-fit-flow-server.onrender.com/users/${params.id}`),
+                loader: ({ params }) => fetch(`https://fit-flow-yoga-backend.onrender.com/users/${params.id}`),
             },
             {
                 path: 'admin-home',
@@ -104,7 +123,7 @@ export const router = createBrowserRouter([
             {
                 path: 'update/:id',
                 element: <InstructorRoute><UpdateClass /></InstructorRoute>,
-                loader: ({ params }) => fetch(`https://yoga-fit-flow-server.onrender.com/class/${params.id}`),
+                loader: ({ params }) => fetch(`https://fit-flow-yoga-backend.onrender.com/class/${params.id}`),
             },
             // * STUDENT ROUTES
             {

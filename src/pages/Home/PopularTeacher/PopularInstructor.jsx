@@ -17,6 +17,8 @@ const PopularInstructor = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  
+
   return (
     <div className="my-28">
       <div className="mb-20">

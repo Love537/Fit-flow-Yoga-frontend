@@ -108,7 +108,7 @@ const Classes = () => {
                                 <div className="absolute inset-0 flex items-center justify-center">
 
                                     <button onClick={() => handelSelect(cls._id)} title={role === 'admin' || role === 'instructor' ? 'Instructor/Admin Can not be able to select ' ? cls.availableSeats <1 : 'No seat avalible' : 'You can select this classes' } disabled={role === 'admin' || role === 'instructor' || cls.availableSeats < 1} className="px-4 py-2 text-white disabled:bg-red-300 bg-secondary duration-300 rounded hover:bg-red-700">
-                                        Select
+                                       Add to cart 
                                     </button>
 
                                 </div>
@@ -123,7 +123,7 @@ const Classes = () => {
                             </div>
                             
                             <Link to={`/class/${cls._id}`}><button className="px-4 py-2 mt-4 w-full mx-auto text-white disabled:bg-red-300 bg-secondary duration-300 rounded hover:bg-red-700">
-                                        View
+                                        View Details
                                     </button></Link>
                         </div>
                     </div>

@@ -47,6 +47,11 @@ const NavBar = () => {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
+    /////
+     const handleLinkClick = () => {
+        setIsMobileMenuOpen(false);
+    };
+    /////
     const handelLogout = e => {
         e.preventDefault();
         Swal.fire({
@@ -78,7 +83,7 @@ const NavBar = () => {
         })
     }
 
-
+     // Dark mode toggle
     useEffect(() => {
         const darkClass = 'dark';
         const root = window.document.documentElement;
@@ -89,12 +94,13 @@ const NavBar = () => {
             root.classList.remove(darkClass);
         }
     }, [isDarkMode]);
+    // Route-based settings
     useEffect(() => {
         setIsHome(location.pathname === '/');
         setIsLogin(location.pathname === '/login');
         setIsFixed(location.pathname === '/register' || location.pathname === '/login');
     }, [location]);
-
+          // Scroll effect
     useEffect(() => {
         const handleScroll = () => {
             const currentPosition = window.pageYOffset;
@@ -106,7 +112,7 @@ const NavBar = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
+        // Navbar background update
     useEffect(() => {
         if (scrollPosition > 100) {
             if (isHome) {
@@ -121,7 +127,16 @@ const NavBar = () => {
 
         }
     }, [scrollPosition]);
-
+      ///////
+       // Auto-close mobile menu after 30s
+    useEffect(() => {
+        if (!isMobileMenuOpen) return;
+        const timeout = setTimeout(() => {
+            setIsMobileMenuOpen(false);
+        }, 10000);
+        return () => clearTimeout(timeout);
+    }, [isMobileMenuOpen]);
+    /////
 
     return (
         <motion.nav
@@ -151,7 +166,7 @@ const NavBar = () => {
                         </button>
                     </div>
 
-                    {/* Navigation Links */}
+                    {/* Navigation Links */}  {/* Desktop Navigation */}
                     <div className="hidden  text-black dark:text-white md:block">
                         <div className="flex">
                             <ul className="ml-10 flex items-center space-x-4 pr-4">
@@ -204,54 +219,59 @@ const NavBar = () => {
                     </div>
                 </div>
 
-                {/* Mobile Menu */}
+                      {/* Mobile Menu */}
                 <AnimatePresence>
                     {isMobileMenuOpen && (
-                        <motion.div
-                            className="md:hidden mt-2 w-full bg-black"
+                        <motion.ul
+                            className="md:hidden mt-2 w-full bg-white dark:bg-stone-950 text-black dark:text-white flex flex-col space-y-2 p-4"
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.5 }}
                         >
-                            {navLinks.map((link) => (
+                            {navLinks.map(link => (
                                 <li key={link.route}>
                                     <NavLink
-                                        className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
+                                        onClick={handleLinkClick}
+                                        className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : 'text-black dark:text-white'} hover:text-secondary duration-300`}
                                         to={link.route}
                                         style={{ whiteSpace: 'nowrap' }}
                                     >
                                         {link.name}
                                     </NavLink>
-
-
                                 </li>
                             ))}
-                            {
-                                user ? null : isLogin ? <li>
-                                    <NavLink
-                                        to='/register'
-                                        className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
-                                    >Register</NavLink></li> : <li>
-                                    <NavLink
-                                        to='/login'
-                                        className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}
-                                    >Login</NavLink></li>
-                            }
-                            {
-                                user && <li><NavLink to='/dashboard' className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : `${navBg.includes('bg-transparent') ? 'text-white' : 'text-black dark:text-white'}`} hover:text-secondary duration-300`}>Dashboard</NavLink></li>
-                            }
-                            {
-                                user && <li>
-                                    <img src={user?.photoURL} className='h-[40px] rounded-full w-[40px]' alt="" />
+                            {!user && (isLogin ? (
+                                <li>
+                                    <NavLink onClick={handleLinkClick} to='/register' className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : 'text-black dark:text-white'} hover:text-secondary duration-300`}>
+                                        Register
+                                    </NavLink>
                                 </li>
-                            }
-                            {
-                                user && <li><NavLink className='font-bold px-3 py-2 bg-secondary text-white rounded-xl' onClick={handelLogout}>Logout</NavLink></li>
-                            }
-
-                            {/* Add more mobile menu links as needed */}
-                        </motion.div>
+                            ) : (
+                                <li>
+                                    <NavLink onClick={handleLinkClick} to='/login' className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : 'text-black dark:text-white'} hover:text-secondary duration-300`}>
+                                        Login
+                                    </NavLink>
+                                </li>
+                            ))}
+                            {user && (
+                                <>
+                                    <li>
+                                        <NavLink onClick={handleLinkClick} to='/dashboard' className={({ isActive }) => `font-bold ${isActive ? 'text-secondary' : 'text-black dark:text-white'} hover:text-secondary duration-300`}>
+                                            Dashboard
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <img src={user?.photoURL} className='h-[40px] rounded-full w-[40px]' alt="User" />
+                                    </li>
+                                    <li>
+                                        <NavLink onClick={(e) => { handelLogout(e); handleLinkClick(); }} className='font-bold px-3 py-2 bg-secondary text-white rounded-xl'>
+                                            Logout
+                                        </NavLink>
+                                    </li>
+                                </>
+                            )}
+                        </motion.ul>
                     )}
                 </AnimatePresence>
             </div>
