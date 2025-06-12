@@ -29,7 +29,7 @@ const Contact = () => {
             <div className="grid md:grid-cols-2 gap-8 p-8 max-w-7xl mx-auto items-start">
                 {/* Contact Info */}
                 <div className="space-y-4">
-                    <h3 className="text-2xl font-semibold text-[#c04c45]">Yoga New Zealand</h3>
+                    <h3 className="text-2xl font-semibold text-[#c04c45]">Fit-flow Yoga New Zealand</h3>
                     <p>P.O. Box 22114, Bay of plenty</p>
                     <p>Email: <a href="mailto:info@yoganewzealand.org.nz" className="text-blue-600">info@fitflow.gmail.com</a></p>
                     <p>Phone: 0800 NZ YOGA / 0800 41 1234</p>

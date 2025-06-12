@@ -184,7 +184,7 @@ const DashboardLayout = () => {
                         }`}
                     onClick={() => setOpen(!open)}
                 >
-                    Yoga Master
+                    Fit-flow-Yoga
                 </h1>
             </div>
 

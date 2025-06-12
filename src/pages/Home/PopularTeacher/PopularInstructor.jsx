@@ -8,14 +8,19 @@ const PopularInstructor = () => {
   console.log(instructors);
   const axiosFetch = useAxiosFetch();
 
-  useEffect(() => {
-    axiosFetch
-      .get("/popular-instructors")
-      .then((data) => {
-        setInstructors(data.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+ useEffect(() => {
+  axiosFetch
+    .get("/popular-instructors")
+    .then((data) => {
+      // ✅ Filter only those with valid instructor object and role === 'instructor'
+      const filtered = data.data.filter(
+        (item) => item.instructor && item.instructor.role === 'instructor'
+      );
+      setInstructors(filtered);
+    })
+    .catch((err) => console.log(err));
+}, []);
+
 
   
 

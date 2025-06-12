@@ -131,10 +131,11 @@ const Footer = () => {
                                 {/*<a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     Healthy Diet
                                 </a> /*/}
-
+                                {/**
                                 <a className="text-secondary dark:text-white dark:hover:text-secondary transition hover:text-secondary dark:/75" href="/">
                                     Fit to health
                                 </a>
+                                 */}
                                 <a className="text-secondary cursor-not-allowed  dark:text-white opacity-50" href="/">
                                     Exercise
                                 </a>
@@ -177,7 +178,7 @@ const Footer = () => {
 
                 <div className="mt-16 border-t border-gray-100 pt-8">
                     <p className="text-center text-xs/relaxed text-gray-500">
-                        © Company 2022. All rights reserved.
+                        © Company 2025. All rights reserved.
 
                         <br />
 
