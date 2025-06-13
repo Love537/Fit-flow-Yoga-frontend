@@ -91,7 +91,7 @@ const SingleClass = () => {
                       className=" rounded-md object-fut w-full h-full block"
                     />
                   </div>
-                  <h2 className="text-2xl mb-2">UI/UX Design and Graphics Learning Bootcamp 2022</h2>
+                  <h2 className="text-2xl mb-2">Class Schedule at Fit-flow Yoga Master</h2>
 
                   <div className="author-meta mt-6 sm:flex  lg:space-x-16 sm:space-x-5 space-y-5 sm:space-y-0 items-center">
                     <div className="flex space-x-4 items-center group">
@@ -209,7 +209,7 @@ const SingleClass = () => {
                                   <img src="/logo.png" alt="" />
                                 </span>
                                 <span className="flex-1 text-black">
-                                  Computer/Mobile
+                                  Correct way to yoga
                                 </span>
                               </div>
                               <div className=" bg-white  rounded px-5 py-[18px] flex  shadow-box2 space-x-[10px] items-center">
@@ -217,7 +217,7 @@ const SingleClass = () => {
                                   <img src="/logo.png" alt="" />
                                 </div>
                                 <span className="flex-1 text-black">
-                                  Paper &amp; Pencil
+                                 Discipline &amp; punctuality
                                 </span>
                               </div>
                               <div className=" bg-white  rounded px-5 py-[18px] flex  shadow-box2 space-x-[10px] items-center">
